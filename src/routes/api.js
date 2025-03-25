@@ -3,7 +3,7 @@ const express = require('express');
 const routerAPI = express.Router();
 
 const {
-    getUsersAPI, postCreateUserAPI, putUpdateUserAPI, postHandleRemoveUserAPI
+    getUsersAPI, postCreateUserAPI, putUpdateUserAPI, postHandleRemoveUserAPI, postUploadSingleFileAPI
 } = require('../controllers/apiController')
 
 routerAPI.get('/', (req, res) => {
@@ -17,8 +17,14 @@ routerAPI.get('/abc', (req, res) => {
 })
 
 routerAPI.get('/users', getUsersAPI)
+
 routerAPI.post('/users', postCreateUserAPI)
+
 routerAPI.put('/users', putUpdateUserAPI)
+
 routerAPI.delete('/users', postHandleRemoveUserAPI)
+
+routerAPI.post('/file', postUploadSingleFileAPI)
+
 
 module.exports = routerAPI; // export default 
