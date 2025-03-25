@@ -24,7 +24,8 @@ const updateUserById = async (email, myname, city, userId) => {
 
     // );
 
-    const res = await User.updateOne({ _id: userId }, { email, name: myname, city });
+    const results = await User.updateOne({ _id: userId }, { email, name: myname, city });
+    return results;
 }
 
 const deleteUserById = async (userId) => {
@@ -33,7 +34,8 @@ const deleteUserById = async (userId) => {
     //     [userId],
     // );
 
-    await User.deleteOne({ _id: userId });
+    const user = await User.deleteOne({ _id: userId });
+    return user;
 }
 
 
