@@ -6,8 +6,12 @@ const port = process.env.PORT || 8888;//port => hartcode . uat .pord
 const hostname = process.env.HOST_NAME;
 const webRoutes = require('./routes/web')
 const apiRoutes = require('./routes/api')
+const fileUpload = require('express-fileupload');
 const connection = require('./config/database')
 
+//config fileUpload
+// default options
+app.use(fileUpload());
 
 //config req.body
 app.use(express.json()) // for json
