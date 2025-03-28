@@ -4,10 +4,13 @@ const routerAPI = express.Router();
 
 const {
     getUsersAPI, postCreateUserAPI, putUpdateUserAPI,
-    postHandleRemoveUserAPI, postUploadSingleFileAPI, postUploadMultipleFilesAPI
+    postHandleRemoveUserAPI, postUploadSingleFileAPI,
+    postUploadMultipleFilesAPI
 } = require('../controllers/apiController')
 
-const { postCreateCustomer } = require('../controllers/customerController')
+const { postCreateCustomer,
+    postCreateArrayCustomer
+} = require('../controllers/customerController')
 
 routerAPI.get('/', (req, res) => {
     res.send("hello world with apis")
@@ -29,5 +32,6 @@ routerAPI.post('/files', postUploadMultipleFilesAPI)
 
 
 routerAPI.post('/customers', postCreateCustomer)
+routerAPI.post('/customers-many', postCreateArrayCustomer)
 
-module.exports = routerAPI; // export default 
+module.exports = routerAPI;
