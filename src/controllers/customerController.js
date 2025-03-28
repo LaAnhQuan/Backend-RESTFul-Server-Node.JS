@@ -1,5 +1,8 @@
 const { uploadSingleFile } = require("../services/fileService")
-const { createCustomerService, createArrayCustomerService } = require("../services/customerService");
+const { createCustomerService,
+    createArrayCustomerService,
+    getAllCustomerService
+} = require("../services/customerService");
 
 // {key : value}
 
@@ -57,5 +60,15 @@ module.exports = {
                 }
             )
         }
+    },
+    getAllCustomers: async (req, res) => {
+        let result = await getAllCustomerService();
+        console.log(">>> check piu : ", result)
+        return res.status(200).json(
+            {
+                errorCode: 0,
+                data: result
+            }
+        )
     }
 }
