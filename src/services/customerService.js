@@ -1,4 +1,5 @@
 const Customer = require("../models/customer");
+const mongoose = require('mongoose')
 
 
 const createCustomerService = async (customerData) => {
@@ -52,7 +53,43 @@ const putUpdateCustomerService = async (name, email, address, id) => {
     }
 }
 
+
+const deleteACustomerService = async (id) => {
+    try {
+        const result = await Customer.deleteById(id);
+        return result;
+
+    } catch (error) {
+        console.log("error", error);
+        return null;
+    }
+}
+
+const deleteArrayCustomerService = async (arr) => {
+    try {
+        const result = await Customer.delete({ _id: { $in: (arr) } });
+        // Customer.find({ deleted: true })
+        //     .then((deletedDocs) => {
+        //         console.log('Các tài liệu đã xóa mềm:', deletedDocs);
+        //     })
+        //     .catch((err) => {
+        //         console.error('Lỗi khi tìm tài liệu đã xóa mềm:', err);
+        //     });
+        return result;
+    } catch (error) {
+        console.log("error", error);
+        return null;
+    }
+
+
+}
+
 module.exports = {
-    createCustomerService, createArrayCustomerService, getAllCustomerService, putUpdateCustomerService
+    createCustomerService,
+    createArrayCustomerService,
+    getAllCustomerService,
+    putUpdateCustomerService,
+    deleteACustomerService,
+    deleteArrayCustomerService
 }
 

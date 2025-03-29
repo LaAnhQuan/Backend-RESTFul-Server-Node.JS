@@ -2,8 +2,12 @@ const { uploadSingleFile } = require("../services/fileService")
 const { createCustomerService,
     createArrayCustomerService,
     getAllCustomerService,
-    updateCustomerService
+    putUpdateCustomerService,
+    deleteACustomerService,
+    deleteArrayCustomerService
+
 } = require("../services/customerService");
+const Customer = require("../models/customer");
 
 // {key : value}
 
@@ -64,7 +68,6 @@ module.exports = {
     },
     getAllCustomers: async (req, res) => {
         let result = await getAllCustomerService();
-        console.log(">>> check piu : ", result)
         return res.status(200).json(
             {
                 errorCode: 0,
@@ -72,11 +75,11 @@ module.exports = {
             }
         )
     },
-    putUpdateCustomer: async (req, res) => {
+    putUpdateCustomers: async (req, res) => {
 
         const { name, email, address, id } = req.body;
 
-        const result = await updateCustomerService(name, email, address, id);
+        const result = await putUpdateCustomerService(name, email, address, id);
 
         return res.status(200).json(
             {
@@ -84,5 +87,29 @@ module.exports = {
                 data: result
             }
         )
+    },
+    postHandleRemoveCustomer: async (req, res) => {
+        const { id } = req.body;
+        const result = await deleteACustomerService(id);
+        return res.status(200).json(
+            {
+                errorCode: 0,
+                data: result
+            }
+        )
+    },
+    delHandleRemoveArrayCustomer: async (req, res) => {
+        const result = await deleteArrayCustomerService(req.body.customersId);
+
+
+        return res.status(200).json(
+            {
+                errorCode: 0,
+                data: result
+            }
+        )
+
     }
+
+
 }
