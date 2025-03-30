@@ -37,6 +37,13 @@ const getAllCustomerService = async (limit, page) => {
         let result = null;
         if (limit && page) {
             let offset = (page - 1) * limit;
+            if (name) {
+                result = await Customer.find(
+                    {
+                        "name": { $regex: '.*' + colName + '.*' }
+                    }
+                ).skip(offset).limit(limit).exec();
+            }
             result = await Customer.find({}).skip(offset).limit(limit).exec();
         } else {
             result = await Customer.find({});
