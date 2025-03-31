@@ -1,6 +1,6 @@
-const { createEmptyProjectService } = require('../services/productService')
+const { createEmptyProjectService, getProject } = require('../services/productService')
 
-postCreateEmptyProject = async (req, res) => {
+const postCreateEmptyProject = async (req, res) => {
 
 
     const result = await createEmptyProjectService(req.body)
@@ -13,6 +13,16 @@ postCreateEmptyProject = async (req, res) => {
     )
 }
 
+const getAllProject = async (req, res) => {
+    let result = await getProject(req.query);
+    return res.status(200).json(
+        {
+            errorCode: 0,
+            data: result
+        }
+    )
+}
+
 module.exports = {
-    postCreateEmptyProject
+    postCreateEmptyProject, getAllProject
 }
