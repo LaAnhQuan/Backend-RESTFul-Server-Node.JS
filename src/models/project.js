@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const mongoose_delete = require('mongoose_delete')
+const mongoose_delete = require('mongoose-delete');
 
 
 //shape data

@@ -16,6 +16,9 @@ const { postCreateCustomer,
     delHandleRemoveArrayCustomer
 } = require('../controllers/customerController')
 
+
+const { postCreateEmptyProject } = require('../controllers/projectController')
+
 routerAPI.get('/', (req, res) => {
     res.send("hello world with apis")
 })
@@ -53,5 +56,8 @@ routerAPI.get('/info/:name/:address', (req, res) => {
         data: req.params
     })
 })
+
+
+routerAPI.post('/projects', postCreateEmptyProject)
 
 module.exports = routerAPI;

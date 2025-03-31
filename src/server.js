@@ -32,7 +32,7 @@ app.use('/v1/api/', apiRoutes);
 
     try {
         //using mongoose
-        // await connection();
+        await connection();
 
         //using mongodb driver
         // Connection URL
