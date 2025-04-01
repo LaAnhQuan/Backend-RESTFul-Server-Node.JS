@@ -24,6 +24,14 @@ const {
     putUpdateProject
 } = require('../controllers/projectController')
 
+
+const {
+    postCreateEmptyTask,
+    getAllTask,
+    putUpdateTask,
+    delHandleRemoveTask
+} = require('../controllers/taskController')
+
 routerAPI.get('/', (req, res) => {
     res.send("hello world with apis")
 })
@@ -56,6 +64,11 @@ routerAPI.get('/projects', getAllProject)
 routerAPI.delete('/projects', delHandleRemoveProject);
 routerAPI.put('/projects', putUpdateProject)
 
+
+routerAPI.post('/tasks', postCreateEmptyTask);
+routerAPI.get('/tasks', getAllTask)
+routerAPI.put('/tasks', putUpdateTask)
+routerAPI.delete('/tasks', delHandleRemoveTask);
 
 routerAPI.get('/info', (req, res) => {
     return res.status(200).json({
