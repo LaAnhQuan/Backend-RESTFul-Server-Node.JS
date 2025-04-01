@@ -9,6 +9,8 @@ const { createCustomerService,
 } = require("../services/customerService");
 const Customer = require("../models/customer");
 
+const Joi = require('joi')
+
 // {key : value}
 
 module.exports = {
@@ -16,37 +18,63 @@ module.exports = {
 
         let { name, address, phone, email, description } = req.body;
 
-        console.log(">>> name", name, description);
 
-        let imageUrl = "";
+        const schema = Joi.object({
+            name: Joi.string()
+                .alphanum()
+                .min(3)
+                .max(30)
+                .required(),
 
-        //image: String,
-        if (!req.files || Object.keys(req.files).length === 0) {
-            //do nothing
+            address: Joi.string(),
+
+
+            phone: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{8, 11}$')),,
+
+            email: Joi.string().email(),
+
+            description: Joi.string,
+        })
+
+        const { error } = schema.validate(req.body);
+        if (error) {
+            return res.status(200).json({
+                msg: error
+            })
         } else {
-            let result = await uploadSingleFile(req.files.image);
-            imageUrl = result.path;
-        }
 
-        let customerData = {
-            name,
-            address,
-            phone,
-            email,
-            description,
-            image: imageUrl
-        }
+            let imageUrl = "";
 
-        let customer = await createCustomerService(customerData)
-
-
-
-        return res.status(200).json(
-            {
-                errorCode: 0,
-                data: customer
+            //image: String,
+            if (!req.files || Object.keys(req.files).length === 0) {
+                //do nothing
+            } else {
+                let result = await uploadSingleFile(req.files.image);
+                imageUrl = result.path;
             }
-        )
+
+            let customerData = {
+                name,
+                address,
+                phone,
+                email,
+                description,
+                image: imageUrl
+            }
+
+            let customer = await createCustomerService(customerData)
+
+
+
+            return res.status(200).json(
+                {
+                    errorCode: 0,
+                    data: customer
+                }
+            )
+
+        }
+
     },
     postCreateArrayCustomer: async (req, res) => {
         let customer = await createArrayCustomerService(req.body.customers);
