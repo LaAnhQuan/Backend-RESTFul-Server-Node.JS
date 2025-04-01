@@ -17,7 +17,12 @@ const { postCreateCustomer,
 } = require('../controllers/customerController')
 
 
-const { postCreateEmptyProject, getAllProject } = require('../controllers/projectController')
+const {
+    postCreateEmptyProject,
+    getAllProject,
+    delHandleRemoveProject,
+    putUpdateProject
+} = require('../controllers/projectController')
 
 routerAPI.get('/', (req, res) => {
     res.send("hello world with apis")
@@ -48,6 +53,8 @@ routerAPI.delete('/customers-many', delHandleRemoveArrayCustomer)
 
 routerAPI.post('/projects', postCreateEmptyProject);
 routerAPI.get('/projects', getAllProject)
+routerAPI.delete('/projects', delHandleRemoveProject);
+routerAPI.put('/projects', putUpdateProject)
 
 
 routerAPI.get('/info', (req, res) => {

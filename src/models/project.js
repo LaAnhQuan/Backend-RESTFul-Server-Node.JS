@@ -35,7 +35,7 @@ const projectSchema = new mongoose.Schema(
     }
 )
 
-customerSchema.plugin(mongoose_delete, { overrideMethods: 'all' });
+projectSchema.plugin(mongoose_delete, { overrideMethods: 'all' });
 
 const Project = mongoose.model("project", projectSchema);
 
